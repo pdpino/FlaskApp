@@ -35,12 +35,11 @@ postgresdb = psycopg2.connect(
 '''
 
 #Cambiar por Path Absoluto en el servidor
-QUERIES_FILENAME = 'queries'
+QUERIES_FILENAME = '/var/www/FlaskApp/queries'
 
 
 @app.route("/")
 def home():
-    return "ok"
     with open(QUERIES_FILENAME, 'r', encoding='utf-8') as queries_file:
         json_file = json.load(queries_file)
         pairs = [(x["name"],
