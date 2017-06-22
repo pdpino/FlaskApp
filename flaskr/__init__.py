@@ -40,6 +40,7 @@ QUERIES_FILENAME = 'queries'
 
 @app.route("/")
 def home():
+    return "ok"
     with open(QUERIES_FILENAME, 'r', encoding='utf-8') as queries_file:
         json_file = json.load(queries_file)
         pairs = [(x["name"],
@@ -52,10 +53,11 @@ def home():
 @app.route("/mongo")
 def mongo():
     query = request.args.get("query")
-    results = eval('mongodb.'+query)
-    results = json_util.dumps(results, sort_keys=True, indent=4)
-    if "find" in query:
-        return render_template('mongo.html', results=results)
+    if not query is None:
+        results = eval('mongodb.'+query)
+        results = json_util.dumps(results, sort_keys=True, indent=4)
+        if "find" in query:
+            return render_template('mongo.html', results=results)
     else:
         return "ok"
 
@@ -72,7 +74,7 @@ def postgres():
 
 @app.route("/example")
 def example():
-    return render_template('example.html')
+    return render_template('file.html')
 
 
 if __name__ == "__main__":
