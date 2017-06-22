@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="main-container">
+    <div class="container">
+      {% for name, db, description, query in results %}
+      {% set algomuysucio = 'onClickQuery("{}","{}")'.format(db, query) %}
+
+      <div class="query-card mdl-shadow--2dp">
+        <div class="mdl-card__title">
+          <h6>{{db}} - {{name}}</h6>
+          <button
+            class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect play"
+          >
+            <i class="material-icons">play_arrow</i>
+          </button>
+        </div>
+        <div class="mdl-card__supporting-text mdl-card--border">
+          <div class="query-card-content">
+            <span>
+              {{description}}
+            </span>
+            <button
+              class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect arrow"
+            >
+              <i class="material-icons">keyboard_arrow_up</i>
+            </button>
+          </div>
+          <div class="query-card-code">
+            <span>{{query}}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <title>{% block title %}{% endblock %} - My Webpage</title>
+
+
+      <!-- JQuery -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/highlight.min.js"></script>
+      <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/languages/json.min.js"></script>
+      <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.6.0/styles/github.min.css">
+      <script>hljs.initHighlightingOnLoad();</script>
+
+      <!-- Material -->
+      <link rel="stylesheet" href="//code.getmdl.io/1.2.0/material.indigo-pink.min.css">
+      <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
+      <script defer src="//code.getmdl.io/1.2.0/material.min.js"></script>
+
+      <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+      <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+      <script src="{{url_for('static', filename='file.js')}}"></script> -->
+
+      <link rel="stylesheet" href="/static/css/style.css">
+      <script src="/static/js/file.js"></script>
+      <!-- <script src="{{url_for('static', filename='js/file.js')}}"> -->
+    {% endblock %}
+  </head>
+  <body>
+    <div>
+      {% block content %}
+      {% endblock %}
+    </div>
+  </body>
+</html>

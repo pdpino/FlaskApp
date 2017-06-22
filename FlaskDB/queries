@@ -1,0 +1,34 @@
+[
+  {
+    "name": "Seleccionar todo",
+    "database": "postgres",
+    "description": "Una muy breve descripción",
+    "query": "SELECT * FROM mytable;"
+  },
+  {
+  "name": "Lorem ipsum dolor sit amet",
+  "database": "mongo",
+  "description":
+  "Vestibulum vulputate metus at nisl lacinia blandit. Quisque fermentum sagittis mi",
+  "query": "myCollection.find( {\"attribute\": \"value\"} )"
+  },
+  {
+    "name": "Sebastián",
+    "database": "postgres",
+    "description": "Una consulta de Sebastián 🙋",
+    "query": "SELECT * FROM mytable WHERE nombre='Sebastián';"
+  },
+  {
+    "name": "Quiero todo de mongo 😄",
+    "database": "mongo",
+    "description": "...",
+    "query": "myCollection.find()"
+  },
+  {
+    "name": "Insertar a mongo",
+    "database": "mongo",
+    "description":
+      "Vestibulum vulputate metus at nisl lacinia blandit. Quisque fermentum sagittis mi",
+    "query": "myCollection.insert( { \"attribute\": \"value\" } )"
+  }
+]
