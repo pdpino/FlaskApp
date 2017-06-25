@@ -72,6 +72,8 @@ def search_by_word():
     if word is None:
         return "[]" # No query
 
+    return str(word)
+
     results = mongodb.colEscuchas.find({"$text":{"$search": wrap_quotes(word)}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
