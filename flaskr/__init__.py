@@ -52,26 +52,41 @@ def home():
 @app.route("/mongo")
 def mongo():
     query = request.args.get("query")
-    if not query is None:
-        results = eval('mongodb.'+query)
-        results = json_util.dumps(results, sort_keys=True, indent=4)
-        if "find" in query:
-            return render_template('mongo.html', results=results)
-    else:
+    if query is None and "find" in query:
         return "no query"
+    
+    results = eval('mongodb.'+query)
+    results = json_util.dumps(results, sort_keys=True, indent=4)
+    return render_template('mongo.html', results=results)
+
+
+def wrap_quotes(word):
+    """Return a word wrapped in quotation marks"""
+    return "\'" + str(word) + "\'"
 
 
 @app.route("/word")
 def search_by_word():
+    """Provide a url to search word in 'contenido'"""
     word = request.args.get("word")
     if word is None:
         return "[]" # No query
 
-    results = mongodb.colEscuchas.find({"$text":{"$search": "\'" + str(word) + "\'"}})
+    results = mongodb.colEscuchas.find({"$text":{"$search": wrap_quotes(word)}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
 
-        
+
+@app.route("/fecha")
+def search_by_date():
+    """Provide a url to search phone numbers by date"""
+    date = request.args.get("date")
+    if date is None:
+        return "[]" # No query
+
+    results = mongodb.colEscuchas.find({"fecha": wrap_quotes(word)}, {"_id":0, "numero":1})
+    results = json_util.dumps(results, sort_keys=True, indent=4)
+    return str(results) # return plain string
 
 
 @app.route("/postgres")
