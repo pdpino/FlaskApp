@@ -14,10 +14,6 @@ def strip_quotes(word):
     """Strip all quotations marks from a word"""
     return str(word).strip("\"\'")
 
-def quote_string(word):
-    """Return a string quoted"""
-    return "\"" + strip_quotes(word) + "\""
-
 
 def parse_json(results):
     """Return a plain string with a json dict"""
@@ -103,13 +99,10 @@ def search_by_number():
     if number is None:
         return "[]" # No query
 
-    #return str(number)
-
     k = request.args.get("k")
     try:
         k = int(k)
-    except:
-        # k is None or malformed
+    except: # k is None or malformed
         k = 1 # defaults to one message
 
     results = mongodb.colEscuchas.find({"numero": strip_quotes(number)}).limit(k)
