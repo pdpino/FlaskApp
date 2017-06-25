@@ -6,7 +6,7 @@
     "query": "colEscuchas.find()"
   },
   {
-    "name": "Ejemplo: eleccionar todo de Postgres",
+    "name": "Ejemplo: seleccionar todo de Postgres",
     "database": "postgres",
     "description": "Descripcion",
     "query": "SELECT * FROM mytable;"
