@@ -60,9 +60,9 @@ def mongo():
     return render_template('mongo.html', results=results)
 
 
-def wrap_quotes(word):
-    """Return a word wrapped in quotation marks"""
-    return "\'" + str(word.strip("\"").strip("\'")) + "\'"
+#def wrap_quotes(word):
+#    """Return a word wrapped in quotation marks"""
+#    return "\'" + str(word.strip("\"").strip("\'")) + "\'"
 
 
 @app.route("/word")
@@ -71,7 +71,7 @@ def search_by_word():
     word = request.args.get("word")
     if word is None:
         return "[]" # No query
-        
+
     results = mongodb.colEscuchas.find({"$text":{"$search": word}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
@@ -84,7 +84,6 @@ def search_by_date():
     if date is None:
         return "[]" # No query
 
-    #return str(type(date))
     results = mongodb.colEscuchas.find({"fecha": date.strip("\"")}, {"_id":0, "numero":1})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
