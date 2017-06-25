@@ -62,7 +62,7 @@ def mongo():
 
 def wrap_quotes(word):
     """Return a word wrapped in quotation marks"""
-    return "\'" + str(word) + "\'"
+    return "\'" + str(word.strip("\"").strip("\'")) + "\'"
 
 
 @app.route("/word")
@@ -71,10 +71,8 @@ def search_by_word():
     word = request.args.get("word")
     if word is None:
         return "[]" # No query
-
-    return str(word)
-
-    results = mongodb.colEscuchas.find({"$text":{"$search": wrap_quotes(word)}})
+        
+    results = mongodb.colEscuchas.find({"$text":{"$search": word}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
 
