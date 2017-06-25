@@ -6,16 +6,9 @@
     "query": "colEscuchas.find()"
   },
   {
-    "name": "Ejemplo: seleccionar todo de Postgres",
-    "database": "postgres",
-    "description": "Descripcion",
-    "query": "SELECT * FROM mytable;"
-  },
-  {
-    "name": "Ejemplo: Insertar a mongo",
+    "name": "Buscar escuchas según un alias",
     "database": "mongo",
-    "description":
-      "Vestibulum vulputate metus at nisl lacinia blandit. Quisque fermentum sagittis mi",
-    "query": "myCollection.insert( { \"attribute\": \"value\" } )"
+    "description": "Buscar escuchas que en 'contenido' contengan alias X",
+    "query": "colEscuchas.find({"$text":{"$search": 'X'}})"
   }
 ]
