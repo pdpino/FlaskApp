@@ -10,5 +10,11 @@
     "database": "mongo",
     "description": "Buscar escuchas que en 'contenido' contengan la palabra 'X'",
     "query": "colEscuchas.find({\"$text\":{\"$search\":\"X\"}})"
+  },
+  {
+    "name": "Buscar escuchas por fecha",
+    "database": "mongo",
+    "description": "Buscar los numeros de las escuchas en cierta fecha",
+    "query": "colEscuchas.find({\"fecha\": \"2017-01-01\"}, {\"_id\":0, \"numero\":1})"
   }
 ]
