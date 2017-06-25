@@ -110,7 +110,7 @@ def search_by_number():
         # k is None or malformed
         k = 1 # defaults to one message
 
-    results = mongodb.colEscuchas.find({"numero": quote_string(number)}).limit(k)
+    results = mongodb.colEscuchas.find({"numero": number}).limit(k)
     return parse_json(results)
 
 
