@@ -16,5 +16,11 @@
     "database": "mongo",
     "description": "Buscar los numeros de las escuchas en cierta fecha",
     "query": "colEscuchas.find({\"fecha\": \"2017-01-01\"}, {\"_id\":0, \"numero\":1})"
+  },
+  {
+    "name": "Buscar escuchas por numero",
+    "database": "mongo",
+    "description": "Dado un numero de telefono, mostrar las ultimas k escuchas",
+    "query": "colEscuchas.find({"numero": "85981495"}).limit(5).sort({"fecha": -1})"
   }
 ]
