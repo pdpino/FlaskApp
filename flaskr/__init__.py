@@ -67,7 +67,7 @@ def home():
 @app.route("/mongo")
 def mongo():
     query = request.args.get("query")
-    if query is None and "find" in query:
+    if query is None or "find" not in query:
         return "no query"
     
     results = eval('mongodb.'+query)
