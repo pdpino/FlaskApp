@@ -9,6 +9,6 @@
     "name": "Buscar escuchas según un alias",
     "database": "mongo",
     "description": "Buscar escuchas que en 'contenido' contengan alias X",
-    "query": "colEscuchas.find({$text:{$search:\"X\"}})"
+    "query": "colEscuchas.find({\"$text\":{\"$search\":\"X\"}})"
   }
 ]

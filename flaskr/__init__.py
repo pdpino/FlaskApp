@@ -61,13 +61,13 @@ def mongo():
         return "no query"
 
 
-@app.route("/alias")
-def search_alias():
-    alias = request.args.get("alias")
-    if alias is None:
+@app.route("/word")
+def search_by_word():
+    word = request.args.get("word")
+    if word is None:
         return "[]" # No query
 
-    results = mongodb.colEscuchas.find({"$text":{"$search": "\'" + str(alias) + "\'"}})
+    results = mongodb.colEscuchas.find({"$text":{"$search": "\'" + str(word) + "\'"}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
 
