@@ -63,6 +63,7 @@ def mongo():
 
 @app.route("/postgres")
 def postgres():
+    return "Postgres API is not available"
     query = request.args.get("query")
     if not query is None:
         cursor = postgresdb.cursor()
