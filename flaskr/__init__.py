@@ -60,6 +60,18 @@ def mongo():
     else:
         return "no query"
 
+@app.route("/query")
+def ruta_query():
+    query = request.args.get("query")
+    if not query is None:
+        results = eval('mongodb.'+query)
+        results = json_util.dumps(results, sort_keys=True, indent=4)
+        if "find" in query:
+            # return render_template('mongo.html', results=results)
+            return str(results);
+    else:
+        return "{}" # No query
+
 
 @app.route("/postgres")
 def postgres():
