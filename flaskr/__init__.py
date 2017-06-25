@@ -67,7 +67,7 @@ def search_alias():
     if alias is None:
         return "[]" # No query
 
-    results = mongodb.colEscuchas.find({"$text":{"$search": str(alias)}})
+    results = mongodb.colEscuchas.find({"$text":{"$search": "\'" + str(alias) + "\'"}})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
 
