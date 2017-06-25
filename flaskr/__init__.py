@@ -84,6 +84,7 @@ def search_by_date():
     if date is None:
         return "[]" # No query
 
+    return date
     results = mongodb.colEscuchas.find({"fecha": date}, {"_id":0, "numero":1})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
