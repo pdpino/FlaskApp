@@ -101,7 +101,7 @@ def search_by_number():
     """Provide a url to search the last k messages of a given number"""
     number = request.args.get("number")
     if number is None:
-        return "no query" # No query
+        return "[]" # No query
 
     k = request.args.get("k")
     try:
@@ -109,9 +109,6 @@ def search_by_number():
     except:
         # k is None or malformed
         k = 1 # defaults to one message
-        return "default k"
-
-    return "everything ok"
 
     results = mongodb.colEscuchas.find({"numero": number}).limit(k)
     return parse_json(results)
