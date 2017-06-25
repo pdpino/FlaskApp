@@ -103,6 +103,8 @@ def search_by_number():
     if number is None:
         return "[]" # No query
 
+    return str(number)
+
     k = request.args.get("k")
     try:
         k = int(k)
