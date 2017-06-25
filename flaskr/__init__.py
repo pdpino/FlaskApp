@@ -103,7 +103,7 @@ def search_by_number():
     if number is None:
         return "[]" # No query
 
-    return str(number)
+    #return str(number)
 
     k = request.args.get("k")
     try:
@@ -112,7 +112,7 @@ def search_by_number():
         # k is None or malformed
         k = 1 # defaults to one message
 
-    results = mongodb.colEscuchas.find({"numero": number}).limit(k)
+    results = mongodb.colEscuchas.find({"numero": strip_quotes(number)}).limit(k)
     return parse_json(results)
 
 
