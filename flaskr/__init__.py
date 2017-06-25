@@ -15,7 +15,7 @@ def strip_quotes(word):
     return str(word).strip("\"\'")
 
 
-def parse_json(results):
+def json_to_str(results):
     """Return a plain string with a json dict"""
     return str(json_util.dumps(results, sort_keys=True, indent=4))
 
@@ -79,7 +79,7 @@ def search_by_word():
         return "[]" # No query
 
     results = mongodb.colEscuchas.find({"$text":{"$search": word}})
-    return parse_json(results)
+    return json_to_str(results)
 
 
 @app.route("/date")
@@ -90,7 +90,7 @@ def search_by_date():
         return "[]" # No query
 
     results = mongodb.colEscuchas.find({"fecha": strip_quotes(date)}, {"_id":0, "numero":1})
-    return parse_json(results)
+    return json_to_str(results)
 
 @app.route("/number")
 def search_by_number():
@@ -106,7 +106,7 @@ def search_by_number():
         k = 1 # defaults to one message
 
     results = mongodb.colEscuchas.find({"numero": strip_quotes(number)}).limit(k).sort("fecha", -1)
-    return parse_json(results)
+    return json_to_str(results)
 
 
 
