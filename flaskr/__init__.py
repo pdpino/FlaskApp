@@ -82,9 +82,9 @@ def search_by_date():
     """Provide a url to search phone numbers by date"""
     date = request.args.get("date")
     if date is None:
-        return "no query" # No query
+        return "[]" # No query
 
-    results = mongodb.colEscuchas.find({"fecha": wrap_quotes(date)}, {"_id":0, "numero":1})
+    results = mongodb.colEscuchas.find({"fecha": date}, {"_id":0, "numero":1})
     results = json_util.dumps(results, sort_keys=True, indent=4)
     return str(results) # return plain string
 
