@@ -19,6 +19,12 @@
     "query": "SELECT * FROM mytable WHERE nombre='Sebastián';"
   },
   {
+    "name": "Obtener todas las escuchas",
+    "database": "mongo",
+    "description": "",
+    "query": "colEscuchas.find()"
+  },
+  {
     "name": "Quiero todo de mongo 😄",
     "database": "mongo",
     "description": "...",
