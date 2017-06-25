@@ -105,7 +105,7 @@ def search_by_number():
     except: # k is None or malformed
         k = 1 # defaults to one message
 
-    results = mongodb.colEscuchas.find({"numero": strip_quotes(number)}).sort({"fecha": -1}).limit(k)
+    results = mongodb.colEscuchas.find({"numero": strip_quotes(number)}).limit(k).sort({"fecha": -1})
     return parse_json(results)
 
 
