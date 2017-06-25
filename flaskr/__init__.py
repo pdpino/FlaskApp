@@ -106,7 +106,6 @@ def search_by_number():
     k = request.args.get("k")
     try:
         k = int(k)
-        return str(k)
     except:
         # k is None or malformed
         k = 1 # defaults to one message
