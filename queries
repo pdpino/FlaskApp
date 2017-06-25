@@ -6,9 +6,9 @@
     "query": "colEscuchas.find()"
   },
   {
-    "name": "Buscar escuchas según un alias",
+    "name": "Buscar escuchas por palabra",
     "database": "mongo",
-    "description": "Buscar escuchas que en 'contenido' contengan alias X",
+    "description": "Buscar escuchas que en 'contenido' contengan la palabra 'X'",
     "query": "colEscuchas.find({\"$text\":{\"$search\":\"X\"}})"
   }
 ]
