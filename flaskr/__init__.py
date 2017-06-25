@@ -10,6 +10,21 @@ from flask import Flask, request, session, g, redirect, url_for, abort, \
      render_template, flash
 
 
+def strip_quotes(word):
+    """Strip all quotations marks from a word"""
+    return str(word).strip("\"\'")
+
+def quote_string(word):
+    """Return a string quoted"""
+    return "\"" + strip_quotes(word) + "\""
+
+
+def parse_json(results):
+    """Return a plain string with a json dict"""
+    return str(json_util.dumps(results, sort_keys=True, indent=4))
+
+
+
 def create_app():
     app = Flask(__name__)
     return app
@@ -60,11 +75,6 @@ def mongo():
     return render_template('mongo.html', results=results)
 
 
-def strip_quotes(word):
-    """Strip all quotations marks from a word"""
-    return str(word).strip("\"").strip("\'")
-
-
 @app.route("/word")
 def search_by_word():
     """Provide a url to search word in 'contenido'"""
@@ -73,11 +83,10 @@ def search_by_word():
         return "[]" # No query
 
     results = mongodb.colEscuchas.find({"$text":{"$search": word}})
-    results = json_util.dumps(results, sort_keys=True, indent=4)
-    return str(results) # return plain string
+    return parse_json(results)
 
 
-@app.route("/fecha")
+@app.route("/date")
 def search_by_date():
     """Provide a url to search phone numbers by date"""
     date = request.args.get("date")
@@ -85,13 +94,34 @@ def search_by_date():
         return "[]" # No query
 
     results = mongodb.colEscuchas.find({"fecha": strip_quotes(date)}, {"_id":0, "numero":1})
-    results = json_util.dumps(results, sort_keys=True, indent=4)
-    return str(results) # return plain string
+    return parse_json(results)
+
+@app.route("/number")
+def search_by_number():
+    """Provide a url to search the last k messages of a given number"""
+    number = request.args.get("number")
+    if number is None:
+        return "[]" # No query
+
+    k = request.args.get("k")
+    try:
+        k = int(k)
+    except:
+        # k is None or malformed
+        k = 1 # defaults to one message
+
+    results = mongodb.colEscuchas.find({"numero": quote_string(number)}).limit(k)
+    return parse_json(results)
+
+
+
+
 
 
 @app.route("/postgres")
 def postgres():
     return "Postgres API is not available"
+    
     query = request.args.get("query")
     if not query is None:
         cursor = postgresdb.cursor()
